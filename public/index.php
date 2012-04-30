@@ -40,7 +40,54 @@ echo '<pre>';
 		exit('could not reliably determine the mimetype of this file');
 	}
 	
-	var_dump(file_get_contents($mimeFile));
+	// get the location of the contents file from the container file
+	if (!is_dir('META-INF')) {
+		exit('No META-INF directory found');
+	}
+	
+	$containerXml = new SimpleXMLElement('META-INF/container.xml', 0, true);
+	
+	$tocLocation = $containerXml->rootfiles->rootfile['full-path'];
+	
+	
+	// open the content file
+	$contentXml = new SimpleXMLElement($tocLocation, 0, true);
+//	var_dump($contentXml);
+	
+	// display the meta data from the file
+	$metadata = $contentXml->metadata->meta;
+	foreach ($metadata as $key => $data) {
+		echo sprintf("%s: %s \n", $data['name'], $data['content']);
+	}
+	
+	// get the spine data
+	$spine = $contentXml->spine;
+	// @todo check for a ADE toc
+	
+	// get the manifest data
+	$manifest = $contentXml->manifest;
+//	var_dump($manifest);
+	$toc = array();
+	foreach ($spine as $key => $itemref) {
+//		var_dump($itemref);
+		
+		foreach ($manifest as $item) {
+			
+			if ($item['id'] == $itemref['idref']) {
+				var_dump($item);
+				
+				$toc[] = $item;
+				break;
+			}
+				
+		}
+	}
+	var_dump($toc);
+	foreach ($toc as $content) {
+		var_dump($content);
+		echo sprintf("%s: %s: %s \n", $content['href'], $content['id'], $content['media-type']);
+	}
+//	var_dump($toc);
 	
 echo '</pre>';
 
