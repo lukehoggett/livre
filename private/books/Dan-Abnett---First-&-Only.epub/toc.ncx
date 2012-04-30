@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
+  <head>
+    <meta content="27b5a0c2-2486-4304-bf2c-ef2127291d79" name="dtb:uid"/>
+    <meta content="2" name="dtb:depth"/>
+    <meta content="calibre (0.8.30)" name="dtb:generator"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>First &amp; Only</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="3128dfb9-57f6-41d4-a047-fca1bb33dcfe" playOrder="1">
+      <navLabel>
+        <text>PART TWO</text>
+      </navLabel>
+      <content src="index_split_001.html"/>
+    </navPoint>
+    <navPoint id="3d0425f3-4e93-4f7e-82bd-0624689c47ca" playOrder="2">
+      <navLabel>
+        <text>PART THREE</text>
+      </navLabel>
+      <content src="index_split_002.html"/>
+    </navPoint>
+    <navPoint id="f3d70e9c-8bb2-4271-81b9-036abc99200c" playOrder="3">
+      <navLabel>
+        <text>PART FOUR</text>
+      </navLabel>
+      <content src="index_split_003.html"/>
+    </navPoint>
+    <navPoint id="26c78316-2a5c-4bbd-9971-0462d3572ae9" playOrder="4">
+      <navLabel>
+        <text>PART FIVE</text>
+      </navLabel>
+      <content src="index_split_004.html"/>
+    </navPoint>
+    <navPoint id="1dcc8114-3783-4765-8359-0ff57a947cb0" playOrder="5">
+      <navLabel>
+        <text>PART SIX</text>
+      </navLabel>
+      <content src="index_split_005.html"/>
+    </navPoint>
+  </navMap>
+</ncx>
