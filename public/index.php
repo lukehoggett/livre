@@ -1,9 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<title>Epub reader sandbox</title>
+	</head>
+	<body>
+
 <?php
-echo '<pre>';
+	echo '<pre>';
 	$logDir = '../private/logs';
 	ini_set('display_errors', 1);
-	ini_set('log_errors', 1);
-	ini_set('error_log', $logDir . '/error_log.txt');
+//	ini_set('log_errors', 1);
+//	ini_set('error_log', $logDir . '/error_log.txt');
 	error_reporting(E_ALL);
 	
 	
@@ -66,26 +74,24 @@ echo '<pre>';
 	
 	// get the manifest data
 	$manifest = $contentXml->manifest;
-//	var_dump($manifest);
 	$toc = array();
-	foreach ($spine as $key => $itemref) {
-//		var_dump($itemref);
-		
-		foreach ($manifest as $item) {
-			
-			if ($item['id'] == $itemref['idref']) {
-				var_dump($item);
-				
+	// @todo refactor to actually use the simple xml element methods
+	foreach ($spine->itemref as $key => $itemref) {
+		foreach ($manifest->item as $item) {
+			if ((string) $item['id'] == (string) $itemref['idref']) {
 				$toc[] = $item;
 				break;
 			}
-				
 		}
 	}
-	var_dump($toc);
 	foreach ($toc as $content) {
-		var_dump($content);
-		echo sprintf("%s: %s: %s \n", $content['href'], $content['id'], $content['media-type']);
+//		echo sprintf("%s: %s: %s \n", $content['href'], $content['id'], $content['media-type']);
+		if (strpos($content['href'], 'xhtml') === false) {
+		?>
+			<div><?php echo file_get_contents($content['href']); ?></div>
+
+		<?php
+		}
 	}
 //	var_dump($toc);
 	
@@ -93,13 +99,7 @@ echo '</pre>';
 
 exit('fin!');
 ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
 
-	<head>
-		<title>Epub reader sandbox</title>
-	</head>
-	<body>
 		
 		
 		<form>
