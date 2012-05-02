@@ -3,11 +3,14 @@
 
 	<head>
 		<title>Epub reader sandbox</title>
+		
+<!--		<link rel="stylesheet" type="text/css" href="/css/reset.css"/>-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+		
 	</head>
 	<body>
 
 <?php
-	echo '<pre>';
 	$logDir = '../private/logs';
 	ini_set('display_errors', 1);
 //	ini_set('log_errors', 1);
@@ -37,7 +40,6 @@
 	
 	// check the mimetype file, and the toc
 	chdir($extractDirName);
-	var_dump(getcwd());
 	$epubMimeType = 'application/epub+zip';
 	$mimeFile = 'mimetype';
 	if (!is_file($mimeFile)) {
@@ -60,12 +62,11 @@
 	
 	// open the content file
 	$contentXml = new SimpleXMLElement($tocLocation, 0, true);
-//	var_dump($contentXml);
 	
 	// display the meta data from the file
 	$metadata = $contentXml->metadata->meta;
 	foreach ($metadata as $key => $data) {
-		echo sprintf("%s: %s \n", $data['name'], $data['content']);
+//		echo sprintf("%s: %s \n", $data['name'], $data['content']);
 	}
 	
 	// get the spine data
@@ -84,24 +85,21 @@
 			}
 		}
 	}
+	$html = '';
 	foreach ($toc as $content) {
-//		echo sprintf("%s: %s: %s \n", $content['href'], $content['id'], $content['media-type']);
 		if (strpos($content['href'], 'xhtml') === false) {
-		?>
-			<div><?php echo file_get_contents($content['href']); ?></div>
-
-		<?php
+			$chapterContent = file_get_contents($content['href']);
+			var_dump($content);
+			// @todo need to be able to filter out the header content, e.g. meta title css etc
+			$html .=<<<html
+<div class="chapter-content">{$chapterContent}</div>
+html;
 		}
 	}
-//	var_dump($toc);
-	
-echo '</pre>';
-
-exit('fin!');
 ?>
-
-		
-		
+		<div id="content">
+			<?php echo $html;?>
+		</div>
 		<form>
 			<fieldset>
 				<label for="upload">upload epub</label>
