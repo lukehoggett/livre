@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 	<head>
 		<title>Epub reader sandbox</title>
 		
 <!--		<link rel="stylesheet" type="text/css" href="/css/reset.css"/>-->
 		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
-		
 	</head>
 	<body>
 
